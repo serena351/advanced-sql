@@ -100,7 +100,7 @@ Let's start with the following denormalized dataset:
 | 3       | Alice        | 123 Maple St    | Widget C    | 1        | 30.00 | 2023-01-03 |
 | 4       | Charlie      | 789 Pine St     | Widget A    | 3        | 10.00 | 2023-01-04 |
 
-***NOTE***: In this dataset, `Price` relates to the price of a single produce, and `Quantity` relates to the number of that product ordered.  No totals are stored as they can be calculated on demand.
+***NOTE***: In this dataset, `Price` relates to the price of a single product, and `Quantity` relates to the number of that product ordered.  No totals are stored as they can be calculated on demand.
 
 ---
 
@@ -113,12 +113,15 @@ Let's start with the following denormalized dataset:
 **1NF Table**:
 
 <details>
+
+```markdown
 | OrderID | CustomerName | CustomerAddress | ProductName | Quantity | Price | OrderDate  |
 |---------|--------------|-----------------|-------------|----------|-------|------------|
 | 1       | Alice        | 123 Maple St    | Widget A    | 2        | 10.00 | 2023-01-01 |
 | 2       | Bob          | 456 Oak St      | Widget B    | 1        | 20.00 | 2023-01-02 |
 | 3       | Alice        | 123 Maple St    | Widget C    | 1        | 30.00 | 2023-01-03 |
 | 4       | Charlie      | 789 Pine St     | Widget A    | 3        | 10.00 | 2023-01-04 |
+```
 
 In this table, each column contains atomic values, and there are no repeating groups. However, there is redundancy in the CustomerName and CustomerAddress columns. To eliminate this redundancy, we need to move the customer information to a separate table.
 
@@ -133,6 +136,7 @@ In this table, each column contains atomic values, and there are no repeating gr
 **2NF Tables**:
 
 <details>
+
 **Orders Table**:
 
 | OrderID | CustomerID | OrderDate  |
@@ -205,19 +209,10 @@ Now, it's your turn to practice normalisation. Here is a denormalized dataset fo
 2. **Second Normal Form (2NF)**: Ensure the table is in 1NF and move partial dependencies to separate tables.
 3. **Third Normal Form (3NF)**: Ensure the table is in 2NF and remove transitive dependencies.
 
----
-
-### Add your Normalised Tables here
-
----
-
-### Potential Solution
-
-Here is a potential solution for the practice dataset:
+### Solution:
 
 **Invoices Table**:
 
-<details>
 | InvoiceID | CustomerID | InvoiceDate |
 |-----------|------------|-------------|
 | 101       | 1          | 2023-02-01  |
@@ -225,38 +220,31 @@ Here is a potential solution for the practice dataset:
 | 103       | 1          | 2023-02-03  |
 | 104       | 3          | 2023-02-04  |
 
-</details>
 
 **Customers Table**:
 
-<details>
 | CustomerID | CustomerName | CustomerEmail        |
 |------------|--------------|----------------------|
 | 1          | Dave         | <dave@example.com>   |
 | 2          | Eve          | <eve@example.com>    |
 | 3          | Frank        | <frank@example.com>  |
-</details>
 
 **InvoiceDetails Table**:
 
-<details>
 | InvoiceID | ProductID | Quantity |
 |-----------|-----------|----------|
 | 101       | 1         | 1        |
 | 102       | 2         | 2        |
 | 103       | 3         | 1        |
 | 104       | 1         | 3        |
-</details>
 
 **Products Table**:
 
-<details>
 | ProductID | ProductName | UnitPrice |
 |-----------|-------------|-----------|
 | 1         | Gadget X    | 50.00     |
 | 2         | Gadget Y    | 75.00     |
 | 3         | Gadget Z    | 100.00    |
-</details>
 
 ---
 
